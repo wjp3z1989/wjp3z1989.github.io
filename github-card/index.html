@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub 名片</title>
+  <meta name="description" content="输入 GitHub 用户名，查看这个人的 GitHub 画像。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%232563eb'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif'%3EG%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="back" href="../">← 返回主页</a>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="切换深色 / 浅色主题">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1 class="title">GitHub 名片</h1>
+    <p class="subtitle">输入一个用户名，看看这个人的 GitHub 画像。</p>
+
+    <!-- 表单：回车或点按钮都能提交 -->
+    <form class="search" id="search-form" autocomplete="off">
+      <input
+        id="username"
+        type="text"
+        placeholder="例如 torvalds，也可以直接粘贴主页链接"
+        aria-label="GitHub 用户名"
+      />
+      <button type="submit" class="btn">查询</button>
+    </form>
+
+    <!-- 加载中 / 报错信息都显示在这里 -->
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+
+    <!-- 结果卡片：查到数据前是隐藏的 -->
+    <section id="card" class="card" hidden>
+      <div class="profile">
+        <img id="avatar" class="avatar" alt="" />
+
+        <div class="profile-main">
+          <h2 id="name" class="name"></h2>
+          <a id="login" class="login" target="_blank" rel="noopener"></a>
+          <p id="bio" class="bio"></p>
+          <ul id="meta" class="meta"></ul>
+        </div>
+      </div>
+
+      <dl class="stats">
+        <div><dt>公开仓库</dt><dd id="stat-repos">-</dd></div>
+        <div><dt>获得 star</dt><dd id="stat-stars">-</dd></div>
+        <div><dt>关注者</dt><dd id="stat-followers">-</dd></div>
+        <div><dt>关注中</dt><dd id="stat-following">-</dd></div>
+      </dl>
+
+      <p id="stars-note" class="note" hidden></p>
+
+      <h3 class="section-title">最受欢迎的项目</h3>
+      <div id="repos" class="repos"></div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p class="muted">数据来自 GitHub 公开 API，实时获取，不做缓存。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
